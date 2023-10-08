@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Cart = require('./Cart')
 
 const userSchema = new mongoose.Schema({
 	email: {
@@ -14,7 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     currentCart: {
-        type: Array,
+        type: Cart.schema,
         required: true
     }
 }, { timestamps: true });

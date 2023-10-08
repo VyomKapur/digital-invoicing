@@ -1,8 +1,9 @@
+const { default: mongoose } = require('mongoose');
 const item = require('../models/Item')
 
 const getAllItems = async(req, res) => {
     try{
-        const items = await item.find();
+        const items = await item.find({});
         res.status(200).json(items)
     } catch(error){
         return res.status(400).json({Message: `Error: ${error}`})
@@ -10,7 +11,19 @@ const getAllItems = async(req, res) => {
 }
 
 const getItem = async(req, res) => {
-    
+    const { id } = req.params  
+    try {
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(404).json({Message: "Invalid Object Id"})
+        }
+        const item = await item.findById(id)
+        if(!item){
+            return res.status(404).json({Message: "No such item"})
+        }
+        res.status(200).json(item)
+    } catch(error){
+        return res.status(400).json({Message: `Error: ${error}`})
+    }
 }
 
 const createItem = async(req, res) => {
@@ -33,9 +46,15 @@ const deleteItem = async(req, res) => {
     if(!id){
         return res.status(300).json({Message:  `Error! Field names required`})
     }
-    try{ 
-        await item.deleteOne({id: id})
-        res.status(200).json({Message: `${id} deleted successfully!`})
+    try{
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(404).json({Message: "Invalid Object Id"})
+        } 
+        const oldItem = await item.findOneAndDelete({_id: id})
+        if(!oldItem){
+            return res.status(404).json({Message: "No such item"})
+        }
+        res.status(200).json({Message: `${oldItem.id} deleted successfully!`})
     } catch(error) { 
         res.status(400).json({Message: `Error: ${error}`})
     }
