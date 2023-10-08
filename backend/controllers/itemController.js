@@ -1,0 +1,49 @@
+const item = require('../models/Item')
+
+const getAllItems = async(req, res) => {
+    try{
+        const items = await item.find();
+        res.status(200).json(items)
+    } catch(error){
+        return res.status(400).json({Message: `Error: ${error}`})
+    }
+}
+
+const getItem = async(req, res) => {
+    
+}
+
+const createItem = async(req, res) => {
+    const { name, description, price, isService } = req.body;
+    if(!name || !description || !price){
+        return res.status(300).json({Message: 'Error field names are required!'})
+    }
+    try {
+        const id = new mongoose.Types.ObjectId()
+        const newItem = await item.create({name, id, description, price, isService})
+        res.status(200).json(newItem)
+    } catch(error){
+        console.log(error)
+        return res.status(400).json({Message: `Error: ${error}`})
+    }
+}
+
+const deleteItem = async(req, res) => {
+    const { id } = req.body
+    if(!id){
+        return res.status(300).json({Message:  `Error! Field names required`})
+    }
+    try{ 
+        await item.deleteOne({id: id})
+        res.status(200).json({Message: `${id} deleted successfully!`})
+    } catch(error) { 
+        res.status(400).json({Message: `Error: ${error}`})
+    }
+}
+
+module.exports = {
+    getAllItems,
+    getItem,
+    createItem,
+    deleteItem
+}
