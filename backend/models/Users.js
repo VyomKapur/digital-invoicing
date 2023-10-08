@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
 	password: {
         type: String,
         required: true
+    },
+    currentCart: {
+        type: Array,
+        required: true
     }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema)
