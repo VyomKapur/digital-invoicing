@@ -5,7 +5,7 @@ const Cart = () => {
     const { cartItems } = useShoppingCart()
     console.log(cartItems)
     return (
-        <Invoice items={cartItems}/>
+        <Invoice items={ cartItems }/>
     )
 }
 
