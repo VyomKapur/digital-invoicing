@@ -14,6 +14,12 @@ const Navbar = () => {
                 <Nav.Link to="/" as={NavLink}>
                     Home
                 </Nav.Link>
+                <Nav.Link to="/login" as={NavLink}>
+                    Login
+                </Nav.Link>
+                <Nav.Link to="/signup" as={NavLink}>
+                    Sign Up
+                </Nav.Link>
             </Nav>
             <Link to='/cart'>
             <Button style={{ width: "3rem", height: "3rem", position: "relative"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">

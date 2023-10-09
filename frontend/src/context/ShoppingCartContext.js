@@ -1,5 +1,4 @@
-import { useContext, useState, createContext } from 'react'
-
+import { useContext, useState, createContext, useEffect } from 'react'
 const ShoppingCartContext = createContext({})
 
 const useShoppingCart = () => {
@@ -7,12 +6,12 @@ const useShoppingCart = () => {
 }
 
 const ShoppingCartProvider = ({ children }) => {    
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState([]) 
     const totalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
     const getItemQuantity = (id) => {
         return cartItems.find(item => item.id === id)?.quantity || 0
     }
-    console.log(cartItems)
+    
     const increaseItemQuantity = (id) => {
         setCartItems((currItems) => {
             const itemIndex = currItems.findIndex((item) => item.id === id);
