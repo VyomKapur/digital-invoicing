@@ -16,11 +16,11 @@ const getItem = async(req, res) => {
         if(!mongoose.Types.ObjectId.isValid(id)){
             return res.status(404).json({Message: "Invalid Object Id"})
         }
-        const item = await item.findById(id)
-        if(!item){
+        const targetItem = await item.findById(id)
+        if(!targetItem){
             return res.status(404).json({Message: "No such item"})
         }
-        res.status(200).json(item)
+        res.status(200).json(targetItem)
     } catch(error){
         return res.status(400).json({Message: `Error: ${error}`})
     }
