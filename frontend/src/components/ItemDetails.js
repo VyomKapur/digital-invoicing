@@ -1,12 +1,16 @@
-import {useState, React} from 'react';
+import { React} from 'react';
 import '../css/ItemDetails.css'; 
 import { Button, Card } from 'react-bootstrap'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 
 const ItemDetails = ({ item }) => {
-    const [quantity, setQuantity] = useState(0)
-
-    const { getItemQuantity } = useShoppingCart()
+    const { 
+        getItemQuantity,
+        increaseItemQuantity,
+        decreaseItemQuantity,
+        removeFromCart,
+    } = useShoppingCart() 
+    const quantity = getItemQuantity(item.id)
     return (
         <Card>
            <Card.Body>
@@ -14,13 +18,13 @@ const ItemDetails = ({ item }) => {
             {item.description}
             <div>
                 {quantity === 0 ? (
-                    <Button onClick={() => setQuantity(1)}>Add to Cart</Button>
+                    <Button onClick={() => increaseItemQuantity(item.id)}>Add to Cart</Button>
                 ): (
                     <>
-                    <Button onClick={() => setQuantity(quantity+1)}>+</Button>
+                    <Button onClick={() => increaseItemQuantity(item.id)}>+</Button>
                     <div>{quantity} in Cart</div>
-                    <Button onClick={() => setQuantity(quantity-1)}>-</Button>
-                    <Button onClick={() => setQuantity(0)}>Remove</Button>
+                    <Button onClick={() => decreaseItemQuantity(item.id)}>-</Button>
+                    <Button onClick={() => removeFromCart(item.id)}>Remove</Button>
                     </>
                 )}
             </div>

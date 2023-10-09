@@ -6,43 +6,42 @@ const useShoppingCart = () => {
     return useContext(ShoppingCartContext)
 }
 
-const ShoppingCartProvider = ({ children }) => {
+const ShoppingCartProvider = ({ children }) => {    
     const [cartItems, setCartItems] = useState([])
-
+    const totalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
     const getItemQuantity = (id) => {
         return cartItems.find(item => item.id === id)?.quantity || 0
     }
+    console.log(cartItems)
     const increaseItemQuantity = (id) => {
-        setCartItems( currItems => {
-            if(currItems.find(item => item.id === id) === null){
-                return [...currItems, {id, quantity: 1}]
-            } else{
-                return currItems.map(item => {
-                    if(item.id === id){
-                        return {...item, quantity: item.quantity+1}
-                    } else{
-                        return item
-                    }
-                })
-            }             
-        })
-    }
-
-    const decreaseItemQuantity = (id) => {
-        setCartItems(currItems => {
-            if(currItems.find(item => item.id === id).quantity === 1){
-                return currItems.filter(item => item.id !== id)
-            } else{
-                return currItems.map(item => {
-                    if(item.id === id){
-                        return {...item, quantity: item.quantity - 1}
-                    } else{
-                        return item
-                    }
-                }) 
+        setCartItems((currItems) => {
+            const itemIndex = currItems.findIndex((item) => item.id === id);
+            if (itemIndex === -1) {
+                return [...currItems, { id, quantity: 1 }];
+            } else {
+                const updatedItems = [...currItems];
+                updatedItems[itemIndex].quantity += 1;
+                return updatedItems;
             }
-        })
-    }
+        });
+    };
+    
+    const decreaseItemQuantity = (id) => {
+        setCartItems((currItems) => {
+            const itemIndex = currItems.findIndex((item) => item.id === id);
+            if (itemIndex !== -1) {
+                const updatedItems = [...currItems];
+                if (updatedItems[itemIndex].quantity === 1) {
+                    updatedItems.splice(itemIndex, 1);
+                } else {
+                    updatedItems[itemIndex].quantity -= 1;
+                }
+                return updatedItems;
+            }
+            return currItems;
+        });
+    };
+    
 
     const removeFromCart = (id) => {
         setCartItems(currItems => {
@@ -50,8 +49,8 @@ const ShoppingCartProvider = ({ children }) => {
         })
     }
     return (
-        <ShoppingCartContext.Provider value={{getItemQuantity, increaseItemQuantity, decreaseItemQuantity, removeFromCart}}>
-            {children}
+        <ShoppingCartContext.Provider value={{getItemQuantity, increaseItemQuantity, decreaseItemQuantity, removeFromCart, cartItems, totalQuantity}}>
+            { children }
         </ShoppingCartContext.Provider>
     )
 }
