@@ -1,8 +1,9 @@
 import { React, useEffect, useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 const Invoice = (props) => {
     const [items, setItems] = useState([])
+    const grandTotal = items.reduce((accumulator, item) => accumulator + (item.quantity * item.price) + item.tax, 0);
     useEffect(() => {
         const getStatement = async() => {
             console.log(JSON.stringify(props.items))
@@ -22,8 +23,9 @@ const Invoice = (props) => {
         }
         getStatement()
     }, [props.items])
+
     return (
-        <Container className="mt-5">
+        <>
         {props.items.length < 1 ? (
             <h1>No Items in cart!</h1>
         ):
@@ -33,11 +35,11 @@ const Invoice = (props) => {
         <Table striped bordered hover>
             <thead>
             <tr>
-                <th>Item</th>
+                <th>Item Name</th>
                 <th>Quantity</th>
-                <th>Price</th>
-                <th>Tax</th>
-                <th>Total</th>
+                <th>Price Per Item</th>
+                <th>Total Tax</th>
+                <th>Total Cost</th>
             </tr>
             </thead>
             <tbody>
@@ -47,14 +49,15 @@ const Invoice = (props) => {
                 <td>{item.quantity}</td>
                 <td>Rs {item.price}</td>
                 <td>Rs {item.tax}</td>
-                <td>Rs{item.quantity * item.price + item.tax}</td>
+                <td>Rs {item.quantity * item.price + item.tax}</td>
                 </tr>
             ))}
             </tbody>
         </Table>
+        <h1>Your grand total is: {grandTotal}</h1>
         </>
         )}
-        </Container>
+        </>
     );
 };
 

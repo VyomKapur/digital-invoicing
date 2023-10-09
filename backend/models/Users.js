@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
 	password: {
         type: String,
         required: true
+    },
+    isAdmin:{
+        type: Boolean
     }
 }, { timestamps: true });
 
@@ -31,7 +34,6 @@ userSchema.statics.signup = async function (email, username, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
     const user = await this.create({email, username, password: hash})
-
     return user
 }   
 

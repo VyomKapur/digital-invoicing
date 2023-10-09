@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import Cart from './pages/Cart'
+import CreateItem from './pages/CreateItem'
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 import { AuthContextProvider } from './context/AuthContext';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/createitem' element={<CreateItem />} />
         </Routes>
       </ShoppingCartProvider>
       </AuthContextProvider>

@@ -1,5 +1,4 @@
 import { React} from 'react';
-import '../css/ItemDetails.css'; 
 import { Button, Card } from 'react-bootstrap'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 
@@ -12,25 +11,35 @@ const ItemDetails = ({ item }) => {
     } = useShoppingCart() 
     const quantity = getItemQuantity(item.id)
     return (
-        <Card>
-           <Card.Body>
-            <Card.Title>{item.name} {item.price}</Card.Title>
-            {item.description}
-            <div>
-                {quantity === 0 ? (
-                    <Button onClick={() => increaseItemQuantity(item.id)}>Add to Cart</Button>
-                ): (
-                    <>
-                    <Button onClick={() => increaseItemQuantity(item.id)}>+</Button>
-                    <div>{quantity} in Cart</div>
-                    <Button onClick={() => decreaseItemQuantity(item.id)}>-</Button>
-                    <Button onClick={() => removeFromCart(item.id)}>Remove</Button>
-                    </>
-                )}
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <Card.Title>{item.name}</Card.Title>
+            <Card.Text>Rs {item.price}</Card.Text>
+            <Card.Text>({item.isService === true? ('Service'): ('Product')})</Card.Text>
+            <Card.Text>{item.description}</Card.Text>
+            <div className="d-flex justify-content-between align-items-center">
+              {quantity === 0 ? (
+                <Button variant="primary" onClick={() => increaseItemQuantity(item.id)}>
+                  Add to Cart
+                </Button>
+              ) : (
+                <>
+                  <Button variant="success" onClick={() => increaseItemQuantity(item.id)}>
+                    +
+                  </Button>
+                  <div>{quantity} in Cart</div>
+                  <Button variant="danger" onClick={() => decreaseItemQuantity(item.id)}>
+                    -
+                  </Button>
+                  <Button variant="warning" onClick={() => removeFromCart(item.id)}>
+                    Remove
+                  </Button>
+                </>
+              )}
             </div>
-            </Card.Body> 
+          </Card.Body>
         </Card>
-    );
+      );
 }
 
 export default ItemDetails;

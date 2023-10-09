@@ -32,7 +32,7 @@ const ShoppingCartProvider = ({ children }) => {
         const itemIndex = cartItems.findIndex((item) => item.id === id);
         if (itemIndex !== -1) {
             const updatedItems = [...cartItems];
-            if (updatedItems[itemIndex].quantity === 1) {
+            if (updatedItems[itemIndex].quantity === 1) {   
                 updatedItems.splice(itemIndex, 1);
             } else {
                 updatedItems[itemIndex].quantity -= 1;
@@ -45,7 +45,11 @@ const ShoppingCartProvider = ({ children }) => {
         const updatedCart = cartItems.filter(item => item.id !== id);
         setCartItems(updatedCart);
     }
-
+    
+    const clearCart = () => {
+        localStorage.removeItem(CART_STORAGE_KEY)
+        setCartItems([])
+    }
     useEffect(() => {
         try {
             const storedCart = localStorage.getItem(CART_STORAGE_KEY);
@@ -63,7 +67,7 @@ const ShoppingCartProvider = ({ children }) => {
     }, [cartItems]);
 
     return (
-        <ShoppingCartContext.Provider value={{ getItemQuantity, increaseItemQuantity, decreaseItemQuantity, removeFromCart, cartItems, totalQuantity }}>
+        <ShoppingCartContext.Provider value={{ getItemQuantity, increaseItemQuantity, decreaseItemQuantity, removeFromCart, clearCart, cartItems, totalQuantity }}>
             { children }
         </ShoppingCartContext.Provider>
     )
