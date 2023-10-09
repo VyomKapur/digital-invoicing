@@ -1,57 +1,72 @@
-import { useContext, useState, createContext, useEffect } from 'react'
-const ShoppingCartContext = createContext({})
+import { useContext, useState, createContext, useEffect } from 'react';
+
+const ShoppingCartContext = createContext({});
 
 const useShoppingCart = () => {
-    return useContext(ShoppingCartContext)
+    return useContext(ShoppingCartContext);
 }
 
 const ShoppingCartProvider = ({ children }) => {    
-    const [cartItems, setCartItems] = useState([]) 
-    const totalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cart'))); 
+    const CART_STORAGE_KEY = 'cart';
+
+    const totalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
+    
     const getItemQuantity = (id) => {
-        return cartItems.find(item => item.id === id)?.quantity || 0
-    }
+        return cartItems.find(item => item.id === id)?.quantity || 0;
+    };
     
     const increaseItemQuantity = (id) => {
-        setCartItems((currItems) => {
-            const itemIndex = currItems.findIndex((item) => item.id === id);
-            if (itemIndex === -1) {
-                return [...currItems, { id, quantity: 1 }];
-            } else {
-                const updatedItems = [...currItems];
-                updatedItems[itemIndex].quantity += 1;
-                return updatedItems;
-            }
-        });
+        const itemIndex = cartItems.findIndex((item) => item.id === id);
+        if (itemIndex === -1) {
+            const updatedCart = [...cartItems, { id, quantity: 1 }];
+            setCartItems(updatedCart);
+        } else {
+            const updatedItems = [...cartItems];
+            updatedItems[itemIndex].quantity += 1;
+            setCartItems(updatedItems);
+        }
     };
     
     const decreaseItemQuantity = (id) => {
-        setCartItems((currItems) => {
-            const itemIndex = currItems.findIndex((item) => item.id === id);
-            if (itemIndex !== -1) {
-                const updatedItems = [...currItems];
-                if (updatedItems[itemIndex].quantity === 1) {
-                    updatedItems.splice(itemIndex, 1);
-                } else {
-                    updatedItems[itemIndex].quantity -= 1;
-                }
-                return updatedItems;
+        const itemIndex = cartItems.findIndex((item) => item.id === id);
+        if (itemIndex !== -1) {
+            const updatedItems = [...cartItems];
+            if (updatedItems[itemIndex].quantity === 1) {
+                updatedItems.splice(itemIndex, 1);
+            } else {
+                updatedItems[itemIndex].quantity -= 1;
             }
-            return currItems;
-        });
+            setCartItems(updatedItems);
+        }
     };
     
-
     const removeFromCart = (id) => {
-        setCartItems(currItems => {
-            return currItems.filter(item => item.id !== id)
-        })
+        const updatedCart = cartItems.filter(item => item.id !== id);
+        setCartItems(updatedCart);
     }
+
+    useEffect(() => {
+        try {
+            const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+            if (storedCart) {
+                const parsedCart = JSON.parse(storedCart);
+                setCartItems(parsedCart);
+            }
+        } catch (error) {
+            console.error('Error loading cart from local storage:', error);
+        }
+    }, []);
+    
+    useEffect(() => {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+    }, [cartItems]);
+
     return (
-        <ShoppingCartContext.Provider value={{getItemQuantity, increaseItemQuantity, decreaseItemQuantity, removeFromCart, cartItems, totalQuantity}}>
+        <ShoppingCartContext.Provider value={{ getItemQuantity, increaseItemQuantity, decreaseItemQuantity, removeFromCart, cartItems, totalQuantity }}>
             { children }
         </ShoppingCartContext.Provider>
     )
 }
 
-export {ShoppingCartProvider, useShoppingCart}
+export { ShoppingCartProvider, useShoppingCart };
