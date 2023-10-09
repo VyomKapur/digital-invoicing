@@ -50,7 +50,7 @@ const deleteItem = async(req, res) => {
         if(!mongoose.Types.ObjectId.isValid(id)){
             return res.status(404).json({Message: "Invalid Object Id"})
         } 
-        const oldItem = await item.findOneAndDelete({_id: id})
+        const oldItem = await item.findOneAndDelete({id: id})
         if(!oldItem){
             return res.status(404).json({Message: "No such item"})
         }
