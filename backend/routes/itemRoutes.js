@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../middleware/auth')
 
 const { getAllItems, getItem, createItem, deleteItem } = require('../controllers/itemController')
+
+
+router.use(auth)
 
 router.get('/', getAllItems)
 

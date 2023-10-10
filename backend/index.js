@@ -7,14 +7,13 @@ const itemRoutes = require('./routes/itemRoutes')
 const userRoutes = require('./routes/userRoutes')
 const taxRoutes = require('./routes/taxRoutes')
 
-
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send("Hello")
+    res.send("Server Index")
 });
 
 app.use('/items', itemRoutes)
