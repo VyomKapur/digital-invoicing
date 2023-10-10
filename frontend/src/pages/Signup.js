@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/AuthContext'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import '../css/Signup.css'
 
 const Signup = () => {
     const { dispatch } = useAuthContext() 
@@ -35,51 +36,49 @@ const Signup = () => {
     }
     return (
         <Container>
-          <Row className="justify-content-center">
-            <Col md={6}>
-              <Form onSubmit={handleSubmit}>
-                <h3>Sign Up</h3>
-                <Form.Group controlId="email">
-                  <Form.Label>Email:</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email id"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group controlId="name">
-                    <Form.Label>Full Name:</Form.Label>
+          <div className='login'>
+            <div className='wrapper'>
+            <Row >
+              <Col md={6}>
+                <Form onSubmit={handleSubmit}>
+                  <h3>Sign Up</h3>
+                  <Form.Group controlId="email">
                     <Form.Control
-                    type="text"
-                    placeholder="Enter full name"
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}
+                      type="email"
+                      placeholder="Enter email id"
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                      required
                     />
-                </Form.Group>
-                <Form.Group controlId="password">
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    required
-                  />
-                </Form.Group>
-    
-                <Button variant="primary" type="submit" disabled={isLoading}
-                style={{
-                    margin: '5px'
-                }}>
-                  {isLoading ? 'Signing up...' : 'Sign Up'}
-                </Button>
-    
-                {error && <div className="mt-2 text-danger">{error}</div>}
-              </Form>
-            </Col>
-          </Row>
+                  </Form.Group>
+                  <Form.Group controlId="name">
+                      <Form.Control
+                      type="text"
+                      placeholder="Enter full name"
+                      onChange={(e) => setUsername(e.target.value)}
+                      value={username}
+                      />
+                  </Form.Group>
+                  <Form.Group controlId="password">
+                    <Form.Control
+                      type="password"
+                      placeholder="Enter password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                      required
+                    />
+                  </Form.Group>
+      
+                  <Button variant="primary" type="submit" disabled={isLoading} className='button'>
+                    {isLoading ? 'Signing up...' : 'Sign Up'}
+                  </Button>
+      
+                  {error && <div className="mt-2 text-danger">{error}</div>}
+                </Form>
+              </Col>
+            </Row>
+            </div>
+          </div>
         </Container>
       );
 }

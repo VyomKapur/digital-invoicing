@@ -1,6 +1,8 @@
 import { Form, Container, Row, Button, Col, Alert } from "react-bootstrap";
 import { useState } from 'react';
 import { useAuthContext } from "../context/AuthContext";
+import '../css/CreateItem.css'
+
 const CreateItem = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -40,7 +42,9 @@ const CreateItem = () => {
 
     return (
         <Container>
-            <Row className="justify-content-center">
+            <Row>
+            <div className='login'>
+            <div className='wrapper-create-item'>
                 <Col md={6}>
                     <Form onSubmit={handleSubmit}>
                         <h3>Create Item</h3>
@@ -50,7 +54,6 @@ const CreateItem = () => {
                             </Alert>
                         )}
                         <Form.Group controlId="name">
-                            <Form.Label>Name:</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter item name"
@@ -61,7 +64,6 @@ const CreateItem = () => {
                         </Form.Group>
 
                         <Form.Group controlId="price">
-                            <Form.Label>Price:</Form.Label>
                             <Form.Control
                                 type="number"
                                 placeholder="Enter item price"
@@ -71,7 +73,6 @@ const CreateItem = () => {
                             />
                         </Form.Group>
                         <Form.Group controlId="description">
-                            <Form.Label>Description: </Form.Label>
                             <Form.Control
                                 as="textarea"
                                 placeholder="Enter item description"
@@ -81,7 +82,6 @@ const CreateItem = () => {
                             />
                         </Form.Group>
                         <Form.Group controlId="isService">
-                            <Form.Label>Item Type:</Form.Label>
                             <Form.Control
                                 as="select"
                                 onChange={(e) => setIsService(e.target.value)}
@@ -93,16 +93,15 @@ const CreateItem = () => {
                             </Form.Control>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" disabled={isLoading}
-                            style={{
-                                margin: '5px'
-                            }}>
+                        <Button variant="primary" type="submit" disabled={isLoading} className="button">
                             {isLoading ? 'Submitting...' : 'Submit'}
                         </Button>
 
                         {error && <div className="mt-2 text-danger">{error}</div>}
                     </Form>
                 </Col>
+                </div>
+            </div>
             </Row>
         </Container>
     );

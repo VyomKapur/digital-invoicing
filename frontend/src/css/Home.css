@@ -1,0 +1,24 @@
+.contain {
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+}
+.problem-statement {
+    width: 600px;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.home-container {
+    background-color: #ffd9aa;
+}
+
+.list-group-item {
+    background-color: #ffd9aa;
+}
+
+.card-header {
+    background-color: var(--primary-color);
+}

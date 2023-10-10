@@ -1,0 +1,7 @@
+.card-body{
+    background-color: #ffd9aa;
+}
+.button{
+    border: none;
+    background-color: var(--primary-color);
+}

@@ -1,6 +1,7 @@
 import { React} from 'react';
 import { Button, Card } from 'react-bootstrap'
 import { useShoppingCart } from '../context/ShoppingCartContext'
+import "../css/ItemDetails.css"
 
 const ItemDetails = ({ item }) => {
     const { 
@@ -19,7 +20,7 @@ const ItemDetails = ({ item }) => {
             <Card.Text>{item.description}</Card.Text>
             <div className="d-flex justify-content-between align-items-center">
               {quantity === 0 ? (
-                <Button variant="primary" onClick={() => increaseItemQuantity(item.id)}>
+                <Button className='button' onClick={() => increaseItemQuantity(item.id)}>
                   Add to Cart
                 </Button>
               ) : (

@@ -1,0 +1,31 @@
+.wrapper-create-item {
+    width: 350px;
+    min-height: 300px;
+    background-color: #ffd9aa;
+    border-radius: 10px;
+    color: var(--secondary-color)
+}
+
+.wrapper-create-item h3 {
+    width: 350px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.wrapper-create-item .form-control {
+    border: none;
+    background-color: #fff0de; 
+    width: 250px;
+    margin-left: 50px;
+    margin-top: 25px;
+}   
+
+.wrapper-create-item .button {
+    background-color: var(--primary-color);
+    border: none;
+    width: 100px;
+    margin-top: 15px;
+    margin-left: 125px;
+    margin-bottom: 15px;
+}

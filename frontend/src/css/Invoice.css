@@ -1,0 +1,7 @@
+.invoice {
+    margin: 20px;
+    color: var(--secondary-color);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffd9aa;
+}

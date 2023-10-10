@@ -1,5 +1,6 @@
 import { React } from 'react';
 import { Table, Container, Row, Col } from 'react-bootstrap';
+import '../css/Invoice.css'
 
 const Invoice = (props) => {
     function formatDate(dateString) {
@@ -11,6 +12,7 @@ const Invoice = (props) => {
     }
     return (
         <Container>
+        <div className='invoice'>
         <Container>
             <Row>
                 <Col><h1>Invoice {props.date && (props.index+1)}</h1></Col>
@@ -45,6 +47,7 @@ const Invoice = (props) => {
             </tbody>
         </Table>
         <h2>Grand total: Rs {props.grandTotal}</h2>
+        </div>
         </Container>
     );
 };

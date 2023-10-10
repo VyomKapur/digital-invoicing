@@ -3,6 +3,7 @@ import Invoice from '../components/Invoice'
 import { Container, Button, Spinner } from 'react-bootstrap'
 import { useAuthContext } from "../context/AuthContext"
 import { useEffect, useState } from "react"
+
 const Cart = () => {
     const { clearCart, cartItems } = useShoppingCart()
     const { user } = useAuthContext()
@@ -14,6 +15,7 @@ const Cart = () => {
     } catch(error){
         console.log(error)
     }
+
     useEffect(() => {
         const getStatement = async() => {
             console.log(items)
