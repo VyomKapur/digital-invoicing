@@ -1,5 +1,5 @@
 {
-    "version": 1,
+    "version": 2,
     "name": "plotline-assignment",
     "builds": [
        { "src": "index.js", "use": "@vercel/node" }
