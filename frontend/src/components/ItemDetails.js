@@ -20,7 +20,7 @@ const ItemDetails = ({ item }) => {
             <Card.Text>{item.description}</Card.Text>
             <div className="d-flex justify-content-between align-items-center">
               {quantity === 0 ? (
-                <Button className='button' onClick={() => increaseItemQuantity(item.id)}>
+                <Button className='button1' onClick={() => increaseItemQuantity(item.id)}>
                   Add to Cart
                 </Button>
               ) : (

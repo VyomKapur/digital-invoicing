@@ -79,8 +79,8 @@ const Cart = () => {
             )}
             {cartItems.length > 0 && (
             <div>
-            <Button onClick={handleClearCart} style={{margin: '10px'}}>Clear Cart</Button>
-            <Button onClick={handleCheckout}>Checkout</Button>
+            <Button onClick={handleClearCart} style={{margin: '10px', backgroundColor:'#b1454a', border: 'none'}}>Clear Cart</Button>
+            <Button onClick={handleCheckout} style={{margin: '10px', backgroundColor:'#b1454a', border: 'none'}}>Checkout</Button>
             </div>
             )}
             </Container>

@@ -8,17 +8,17 @@
 }
 
 .done {
-    text-decoration: line-through;
+    text-decoration: line-through !important;
 }
 
 .home-container {
-    background-color: #ffd9aa;
+    background-color: #ffd9aa !important;
 }
 
 .list-group-item {
-    background-color: #ffd9aa;
+    background-color: #ffd9aa !important;
 }
 
 .card-header {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color) !important;
 }
