@@ -26,7 +26,6 @@ function App() {
           <Route path='/signup' element={!user? <Signup /> : <Navigate to='/' />} />
           <Route path='/createitem' element={user && user.isAdmin ? <CreateItem />: <Navigate to='/' />} />
         </Routes>
-
       </HashRouter>
     </div>
   );

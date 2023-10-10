@@ -7,7 +7,11 @@ const useShoppingCart = () => {
 }
 
 const ShoppingCartProvider = ({ children }) => {    
-    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cart'))); 
+    const [cartItems, setCartItems] = useState(() => {
+        const storedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY));
+        return Array.isArray(storedCart) ? storedCart : [];
+    });
+    
     const CART_STORAGE_KEY = 'cart';
 
     const totalQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
