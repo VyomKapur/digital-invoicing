@@ -7,10 +7,11 @@ import { useAuthContext } from '../context/AuthContext';
 
 
 const Navbar = () => {
-    const { totalQuantity } = useShoppingCart()
+    const { clearCart, totalQuantity } = useShoppingCart()
     const { user, dispatch } = useAuthContext()
     const handleLogout = () => {
         localStorage.removeItem('user')
+        clearCart()
         dispatch({type: 'logout'})
     }
     return (

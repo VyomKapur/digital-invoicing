@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react'
 import ItemDetails from '../components/ItemDetails.js'
 import { Container, Row, Col } from "react-bootstrap"
-
+import { useAuthContext } from '../context/AuthContext.js'
 const Home = () => {
     const [items, setItems] = useState([])
+    const { user } = useAuthContext()
     useEffect(() => {
         const fetchItems = async () => {
-            const response = await fetch('http://localhost:3500/items')
+            const response = await fetch('http://localhost:3500/items',{
+                headers: {
+                    "Authorization": `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
             if(response.ok){
                 setItems(json)
             }
         }
-        fetchItems()
-    }, [items])
+        if(user){
+            fetchItems()
+        }
+        
+    }, [user, items])
     return (
         <Container>
         <Row md={2} xs={1} lg={3} className="g-3">

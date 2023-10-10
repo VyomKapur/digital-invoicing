@@ -1,9 +1,10 @@
 import { React, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-
+import { useAuthContext } from '../context/AuthContext';
 const Invoice = (props) => {
     const [items, setItems] = useState([])
     const grandTotal = items.reduce((accumulator, item) => accumulator + (item.quantity * item.price) + item.tax, 0);
+    const { user } = useAuthContext()
     useEffect(() => {
         const getStatement = async() => {
             console.log(JSON.stringify(props.items))
@@ -11,7 +12,8 @@ const Invoice = (props) => {
                 method: 'POST',
                 body: JSON.stringify(props.items),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
             })
             const json = await response.json()
@@ -21,8 +23,10 @@ const Invoice = (props) => {
                 console.log(items)
             }
         }
-        getStatement()
-    }, [props.items])
+        if(user){
+            getStatement()
+        }
+    }, [props.items, user])
 
     return (
         <>

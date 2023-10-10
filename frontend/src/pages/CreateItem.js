@@ -1,6 +1,6 @@
 import { Form, Container, Row, Button, Col, Alert } from "react-bootstrap";
 import { useState } from 'react';
-
+import { useAuthContext } from "../context/AuthContext";
 const CreateItem = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -9,14 +9,19 @@ const CreateItem = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false); 
+    const { user } = useAuthContext()
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!user && !user.isAdmin){
+            return 
+        }
         setIsLoading(true);
         const isService = service === "service"
         const response = await fetch("http://localhost:3500/items", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${user.token}`
             },
             body: JSON.stringify({ name, description, price, isService})
         });
