@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "homepage": "https://plotline-assignment-one.vercel.app/",
   "version": "0.1.0",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
