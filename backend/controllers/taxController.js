@@ -45,6 +45,7 @@ const getTax = async (req, res) => {
             items.map(async (newItem) => {
                 const obj = await item.findOne({id: newItem.id}); 
                 let tax;
+                console.log(obj)
                 if (obj.isService === true) {
                     tax = serviceTax(obj.price, newItem.quantity);
                 } else {

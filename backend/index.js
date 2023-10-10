@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3500
 const itemRoutes = require('./routes/itemRoutes')
 const userRoutes = require('./routes/userRoutes')
 const taxRoutes = require('./routes/taxRoutes')
+const ordersRoutes = require('./routes/ordersRoutes')
 
 const app = express()
 
@@ -21,6 +22,8 @@ app.use('/items', itemRoutes)
 app.use('/users', userRoutes)
 
 app.use('/calculatetax', taxRoutes)
+
+app.use('/orders', ordersRoutes)
 
 mongoose.connect(process.env.DATABASE_URI)
     .then(() => {
