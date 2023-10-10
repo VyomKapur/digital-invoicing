@@ -21,7 +21,7 @@ const Home = () => {
             fetchItems()
         }
         
-    }, [user, items])
+    }, [user])
     return (
         <Container>
         <Row md={2} xs={1} lg={3} className="g-3">

@@ -18,9 +18,12 @@ const Navbar = () => {
         <NavBar sticky="top" className="bg-white shadow-sm mb-3">
         <Container>
             <Nav className="me-auto">
-                <Nav.Link to="/" as={NavLink}>
+                {user && (
+                    <Nav.Link to="/" as={NavLink}>
                     Home
-                </Nav.Link>
+                    </Nav.Link>
+                )}
+                
                 {!user && (
                 <>
                 <Nav.Link to="/login" as={NavLink}>
@@ -31,11 +34,18 @@ const Navbar = () => {
                 </Nav.Link>
                 </>)}
             </Nav>
-            {user && ( <Nav.Link onClick={handleLogout}>
+            {user && ( 
+            <>
+            <Nav.Link style={{margin: '5px'}} to='/orders' as={NavLink}>
+                Orders
+            </Nav.Link>
+            <Nav.Link style={{margin: '5px'}} onClick={handleLogout}>
                 Logout
             </Nav.Link>
+            </>
             )}
-            {user?.isAdmin === true && ( <Nav.Link to="/createitem" as={NavLink}>
+            {user?.isAdmin === true && ( 
+            <Nav.Link style={{margin: '5px'}} to="/createitem" as={NavLink}>
                 Create Item
             </Nav.Link>
             )}
