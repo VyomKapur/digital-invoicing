@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -14,7 +14,7 @@ function App() {
   const { user } = useAuthContext()
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter basename='/'>
       <Navbar />
         <Routes>
           <Route path='/' element={<Home />}/>
@@ -27,7 +27,7 @@ function App() {
           <Route path='/createitem' element={user && user.isAdmin ? <CreateItem />: <Navigate to='/' />} />
         </Routes>
 
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
