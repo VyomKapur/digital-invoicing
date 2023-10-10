@@ -7,6 +7,8 @@ import Navbar from './components/Navbar'
 import Cart from './pages/Cart'
 import CreateItem from './pages/CreateItem'
 import Orders from './pages/Orders'
+import Products from './pages/Products'
+import Services from './pages/Services'
 import { useAuthContext } from './context/AuthContext';
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
       <BrowserRouter>
       <Navbar />
         <Routes>
-          <Route path='/' element={user? <Home />: <Navigate to='/login' />}/>
+          <Route path='/' element={<Home />}/>
+          <Route path='/products' element={user? <Products />: <Navigate to='/login' />}/>
+          <Route path='/services' element={user? <Services />: <Navigate to='/login' />}/>
           <Route path='/orders' element={user? <Orders />: <Navigate to='/login' />}/>
           <Route path='/cart' element={user ? <Cart /> : <Navigate to='/' />} />
           <Route path='/login' element={!user ? <Login />:<Navigate to='/' />} />

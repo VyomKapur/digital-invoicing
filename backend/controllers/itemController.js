@@ -1,26 +1,19 @@
 const { default: mongoose } = require('mongoose');
 const item = require('../models/Item')
 
-const getAllItems = async(req, res) => {
+const getAllProducts = async(req, res) => {
     try{
-        const items = await item.find({});
+        const items = await item.find({isService: false});
         res.status(200).json(items)
     } catch(error){
         return res.status(400).json({Message: `Error: ${error}`})
     }
 }
 
-const getItem = async(req, res) => {
-    const { id } = req.params  
-    try {
-        if(!mongoose.Types.ObjectId.isValid(id)){
-            return res.status(404).json({Message: "Invalid Object Id"})
-        }
-        const targetItem = await item.findById(id)
-        if(!targetItem){
-            return res.status(404).json({Message: "No such item"})
-        }
-        res.status(200).json(targetItem)
+const getAllServices = async(req, res) => {
+    try{
+        const items = await item.find({isService: true});
+        res.status(200).json(items)
     } catch(error){
         return res.status(400).json({Message: `Error: ${error}`})
     }
@@ -61,8 +54,8 @@ const deleteItem = async(req, res) => {
 }
 
 module.exports = {
-    getAllItems,
-    getItem,
+    getAllProducts,
+    getAllServices,
     createItem,
     deleteItem
 }

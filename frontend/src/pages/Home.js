@@ -1,34 +1,16 @@
-import { useEffect, useState } from 'react'
-import ItemDetails from '../components/ItemDetails.js'
-import { Container, Row, Col } from "react-bootstrap"
-import { useAuthContext } from '../context/AuthContext.js'
+import { Container, Card } from "react-bootstrap"
 const Home = () => {
-    const [items, setItems] = useState([])
-    const { user } = useAuthContext()
-    useEffect(() => {
-        const fetchItems = async () => {
-            const response = await fetch('http://localhost:3500/items',{
-                headers: {
-                    "Authorization": `Bearer ${user.token}`
-                }
-            })
-            const json = await response.json()
-            if(response.ok){
-                setItems(json)
-            }
-        }
-        if(user){
-            fetchItems()
-        }
-        
-    }, [user])
     return (
         <Container>
-        <Row md={2} xs={1} lg={3} className="g-3">
-            {items.map((item) => (
-                <Col><ItemDetails key={items._id} item={item}/></Col>
-            ))}
-        </Row>
+            <Card>
+                <Card.Header>Problem statement</Card.Header>
+                <Card.Body>
+                A digital invoicing platform is essential for businesses to manage their invoicing, payments,
+                and financial transactions efficiently. This application is a Node.js server coupled with
+                an intuitive user interface for an invoicing system that ensures smooth operations and
+                provides a user-friendly experience.
+                </Card.Body>
+            </Card>
         </Container>
     )
 }

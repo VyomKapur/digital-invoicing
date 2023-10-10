@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/AuthContext'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap'
 
 const Login = () => {
     const { dispatch } = useAuthContext() 

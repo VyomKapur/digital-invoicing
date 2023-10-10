@@ -18,10 +18,18 @@ const Navbar = () => {
         <NavBar sticky="top" className="bg-white shadow-sm mb-3">
         <Container>
             <Nav className="me-auto">
-                {user && (
-                    <Nav.Link to="/" as={NavLink}>
+                <Nav.Link to="/" as={NavLink}>
                     Home
+                </Nav.Link>
+                {user && (
+                    <>
+                    <Nav.Link to="/products" as={NavLink}>
+                    Products
                     </Nav.Link>
+                    <Nav.Link to="/services" as={NavLink}>
+                    Services
+                    </Nav.Link>
+                    </>
                 )}
                 
                 {!user && (

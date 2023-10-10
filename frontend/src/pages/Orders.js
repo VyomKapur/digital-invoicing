@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Invoice from '../components/Invoice'
 import { useAuthContext } from "../context/AuthContext"
+import { Container } from "react-bootstrap"
 const Orders = () => {
     const [orders, setOrders] = useState([])
     const { user } = useAuthContext()
@@ -23,9 +24,15 @@ const Orders = () => {
     }, [])
     return (
         <>
-        {orders.map(order => (
-            <Invoice key={order?._id} items={order?.items} grandTotal={order?.totalPrice} />
-        ))}
+        {orders.length > 0 ? (
+            orders.map((order, index) => (
+                <Invoice key={order?._id} index={index} items={order?.items} grandTotal={order?.totalPrice} date={order?.createdAt}/>
+            ))
+        ):(
+            <Container>
+            <h1>No previous invoice</h1>
+            </Container>
+        )}
         </>
     )
 }

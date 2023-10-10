@@ -1,15 +1,25 @@
 import { React } from 'react';
-import { Table, Container } from 'react-bootstrap';
+import { Table, Container, Row, Col } from 'react-bootstrap';
 
 const Invoice = (props) => {
+    function formatDate(dateString) {
+        const date = new Date(dateString); 
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString().slice(-2);
+        return `${day}/${month}/${year}`;
+    }
     return (
         <Container>
-        {props.items.length < 1 ? (
-            <h1>No Items in cart!</h1>
-        ):
-        (
-        <>
-        <h1>Invoice</h1>
+        <Container>
+            <Row>
+                <Col><h1>Invoice {props.date && (props.index+1)}</h1></Col>
+                {props.date && (
+                <Col style={{margin: '10px'}}><h5>Date: {formatDate(props.date)}</h5></Col>
+                )}
+            </Row>
+        </Container>
+        
         <Table striped bordered hover>
             <thead>
             <tr>
@@ -35,8 +45,6 @@ const Invoice = (props) => {
             </tbody>
         </Table>
         <h2>Grand total: Rs {props.grandTotal}</h2>
-        </>
-        )}
         </Container>
     );
 };

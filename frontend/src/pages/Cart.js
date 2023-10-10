@@ -1,12 +1,13 @@
 import { useShoppingCart } from "../context/ShoppingCartContext"
 import Invoice from '../components/Invoice'
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Spinner } from 'react-bootstrap'
 import { useAuthContext } from "../context/AuthContext"
 import { useEffect, useState } from "react"
 const Cart = () => {
     const { clearCart, cartItems } = useShoppingCart()
     const { user } = useAuthContext()
     const [items, setItems] = useState(cartItems)
+    const [isLoading, setIsLoading] = useState(true)
     let grandTotal = 0
     try{
         grandTotal = items.reduce((accumulator, item) => accumulator + (item.quantity * item.price) + item.tax, 0)
@@ -33,9 +34,13 @@ const Cart = () => {
         }
         if(user){
             getStatement()
+            setIsLoading(false)
         }
     }, [user])
-
+    const handleClearCart = () => {
+        setItems([])
+        clearCart()
+    }
     const handleCheckout = (e) =>{
         e.preventDefault()
         const payload = { user_email: user.email, items: items, totalPrice: grandTotal}
@@ -57,16 +62,19 @@ const Cart = () => {
             }
         }
         createOrder()
-    }
-    const handleClearCart = () => {
-        setItems([])
-        clearCart()
+        handleClearCart()
     }
     return (
         <>
+        {isLoading && (
+            <Spinner animation="border" />
+        )}
         {user && (
             <Container className="mt-5">
-            <Invoice items={ items } grandTotal={ grandTotal }/>
+            {items.length > 0 ? (<Invoice items={ items } grandTotal={ grandTotal }/>):
+            (
+                <h1>No Items in cart!</h1>
+            )}
             {cartItems.length > 0 && (
             <div>
             <Button onClick={handleClearCart} style={{margin: '10px'}}>Clear Cart</Button>
