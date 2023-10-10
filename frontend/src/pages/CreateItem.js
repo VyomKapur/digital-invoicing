@@ -17,7 +17,7 @@ const CreateItem = () => {
         }
         setIsLoading(true);
         const isService = service === "service"
-        const response = await fetch("http://localhost:3500/items", {
+        const response = await fetch("https://backend-zeta-roan.vercel.app/items", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

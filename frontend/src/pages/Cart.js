@@ -17,7 +17,7 @@ const Cart = () => {
     useEffect(() => {
         const getStatement = async() => {
             console.log(items)
-            const response = await fetch('http://localhost:3500/calculatetax', {
+            const response = await fetch('https://backend-zeta-roan.vercel.app/calculatetax', {
                 method: 'POST',
                 body: JSON.stringify(items),
                 headers: {
@@ -46,7 +46,7 @@ const Cart = () => {
         const payload = { user_email: user.email, items: items, totalPrice: grandTotal}
         console.log(payload)
         const createOrder = async() => {
-            const response = await fetch('http://localhost:3500/orders/place', {
+            const response = await fetch('https://backend-zeta-roan.vercel.app/orders/place', {
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers: {

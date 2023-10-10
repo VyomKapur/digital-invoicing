@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import '../css/Navbar.css';
 import { Button, Container, Nav, Navbar as NavBar } from "react-bootstrap"
 import { useShoppingCart } from '../context/ShoppingCartContext'
 import { useAuthContext } from '../context/AuthContext';

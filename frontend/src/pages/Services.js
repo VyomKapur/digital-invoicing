@@ -8,7 +8,7 @@ const Services = () => {
     const { user } = useAuthContext()
     useEffect(() => {
         const fetchItems = async () => {
-            const response = await fetch('http://localhost:3500/items/services',{
+            const response = await fetch('https://backend-zeta-roan.vercel.app/items/services',{
                 headers: {
                     "Authorization": `Bearer ${user.token}`
                 }

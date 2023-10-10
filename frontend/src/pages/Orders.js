@@ -8,7 +8,7 @@ const Orders = () => {
     useEffect(() => {
         const getOrders = async() =>{
             const payload = {user_email: user.email}
-            const response = await fetch('http://localhost:3500/orders', {
+            const response = await fetch('https://backend-zeta-roan.vercel.app/orders', {
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers: {

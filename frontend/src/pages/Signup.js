@@ -12,7 +12,7 @@ const Signup = () => {
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
-        const response = await fetch("http://localhost:3500/users/signup", {
+        const response = await fetch("https://backend-zeta-roan.vercel.app/users/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/AuthContext'
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
 const Login = () => {
     const { dispatch } = useAuthContext() 
@@ -11,7 +11,7 @@ const Login = () => {
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
-        const response = await fetch("http://localhost:3500/users/login", {
+        const response = await fetch("https://backend-zeta-roan.vercel.app/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
