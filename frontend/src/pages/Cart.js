@@ -3,7 +3,7 @@ import Invoice from '../components/Invoice'
 import { Container, Button, Spinner } from 'react-bootstrap'
 import { useAuthContext } from "../context/AuthContext"
 import { useEffect, useState } from "react"
-
+import { useNavigate } from "react-router-dom"
 const Cart = () => {
     const { clearCart, cartItems } = useShoppingCart()
     const { user } = useAuthContext()
@@ -15,6 +15,7 @@ const Cart = () => {
     } catch(error){
         console.log(error)
     }
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getStatement = async() => {
@@ -65,6 +66,7 @@ const Cart = () => {
         }
         createOrder()
         handleClearCart()
+        navigate('/orders',{replace: true})
     }
     return (
         <>
