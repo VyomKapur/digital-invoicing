@@ -1,6 +1,6 @@
 # Plotline Assignment
 
-Hello Team! The following are the credentials to test out the application: 
+Hello! The following are the credentials to test out the application: 
 
 ## Application link
 https://plotline-assignment-two.vercel.app/#/
