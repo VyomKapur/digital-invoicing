@@ -1,5 +1,3 @@
-# Plotline Assignment
-
 Hello! The following are the credentials to test out the application: 
 
 ## Application link
